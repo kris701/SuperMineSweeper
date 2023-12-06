@@ -21,6 +21,7 @@ namespace SuperMineSweeperUI.Windows
             ColorScheme = new ColorScheme();
             Border.BorderStyle = BorderStyle.Rounded;
             Border.BorderBrush = Color.BrightBlue;
+            CanFocus = false;
 
             _boardWindow = new BoardWindow(game);
             _infoWindow = new InfoWindow(game);

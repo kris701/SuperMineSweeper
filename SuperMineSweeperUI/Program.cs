@@ -1,4 +1,5 @@
 ﻿using System;
+using SuperMineSweeperUI.Dialogs;
 using SuperMineSweeperUI.GameStyles;
 using SuperMineSweeperUI.Windows;
 using Terminal.Gui;
@@ -31,6 +32,13 @@ namespace SuperMineSweeperUI
                         }),
                         new MenuItem ("_Restart", "", () => {
                             Application.RequestStop ();
+                        }),
+                        new MenuItem ("_How To Play", "", () => {
+                            var dialog = new HowToPlayDialog();
+                            dialog.OkButton.Clicked += () => {
+                                Application.Top.Remove(dialog);
+                            };
+                            Application.Top.Add(dialog);
                         })
                     }),
                     new MenuBarItem ("_Styles", styles.ToArray()),
