@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Reflection.Metadata.BlobBuilder;
 
-namespace SuperMineSweeper
+namespace SuperMineSweeper.Boards
 {
-    public class SquareBoard : IBoard
+    public abstract class BaseBoard : IBoard
     {
         public int Width { get; set; }
         public int Height { get; set; }
         public Cell?[,] Cells { get; set; }
 
-        public SquareBoard(int width, int height, int bombs)
+        public BaseBoard(int width, int height, int bombs)
         {
             Width = width;
             Height = height;
@@ -20,34 +21,32 @@ namespace SuperMineSweeper
             Initialize(bombs);
         }
 
-        public void Initialize(int bombs)
+        public abstract void Initialize(int bombs);
+
+        internal void PlaceBombs(int bombs)
         {
-            if (Width * Height < bombs)
-                throw new Exception("Amount of bombs cannot be larger than the board size.");
-
-            Cells = new Cell?[Width,Height];
-            for (int x = 0; x < Width; x++)
-                for (int y = 0; y < Height; y++)
-                    Cells[x, y] = new Cell(x, y);
-
             var rnd = new Random();
-            for(int i = 0; i < bombs; i++)
+            for (int i = 0; i < bombs; i++)
             {
                 var x = rnd.Next(0, Width);
                 var y = rnd.Next(0, Height);
                 var check = Cells[x, y];
-                if (check != null && check.HasBomb)
+                if (check != null && !check.HasBomb)
+                {
+                    check.HasBomb = true;
+                    check.Item = "X";
+
+                }
+                else
                 {
                     i--;
                     continue;
                 }
-                if (check != null)
-                {
-                    check.HasBomb = true;
-                    check.Item = "X";
-                }
             }
+        }
 
+        internal void SetDistanceCount()
+        {
             for (int x = 0; x < Width; x++)
             {
                 for (int y = 0; y < Height; y++)
@@ -70,7 +69,7 @@ namespace SuperMineSweeper
             }
         }
 
-        private bool IsBomb(int x, int y)
+        internal bool IsBomb(int x, int y)
         {
             if (x < 0)
                 return false;

@@ -45,9 +45,11 @@ namespace SuperMineSweeper
 
         private void ClearAdjacentCells(Cell cell)
         {
-            if (cell.IsVisible || cell.Item != "0")
+            if (cell.IsVisible || cell.HasBomb)
                 return;
             cell.IsVisible = true;
+            if (cell.Item != "0")
+                return;
             if (IsWithinBoard(cell.X + 1, cell.Y) && Board.Cells[cell.X + 1, cell.Y] is Cell other1) ClearAdjacentCells(other1);
             if (IsWithinBoard(cell.X - 1, cell.Y) && Board.Cells[cell.X - 1, cell.Y] is Cell other2) ClearAdjacentCells(other2);
             if (IsWithinBoard(cell.X, cell.Y + 1) && Board.Cells[cell.X, cell.Y + 1] is Cell other3) ClearAdjacentCells(other3);
