@@ -60,6 +60,7 @@ namespace SuperMineSweeperUI.Windows
                     }
                 }
             }
+            UpdateField();
         }
 
         private void HandleCellClick(Cell cell)
