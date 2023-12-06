@@ -10,7 +10,7 @@ using Terminal.Gui;
 
 namespace SuperMineSweeperUI.Windows
 {
-    public class InfoWindow : Window
+    public class InfoWindow : FrameView
     {
         public static int WindowWidth = 15;
 

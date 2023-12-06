@@ -8,7 +8,7 @@ using Terminal.Gui;
 
 namespace SuperMineSweeperUI.Windows
 {
-    public class BoardWindow : Window
+    public class BoardWindow : FrameView
     {
         public delegate void UpdatedHandler();
         public event UpdatedHandler? OnUpdate;
@@ -27,12 +27,12 @@ namespace SuperMineSweeperUI.Windows
             Title = "Board";
             ColorScheme = new ColorScheme();
             Border.BorderStyle = BorderStyle.Rounded;
-            KeyDown += (a) =>
+            Application.Top.KeyDown += (a) =>
             {
                 if (a.KeyEvent.IsCtrl)
                     _isHoldingCtrl = true;
             };
-            KeyUp += (a) =>
+            Application.Top.KeyUp += (a) =>
             {
                 if (a.KeyEvent.IsCtrl)
                     _isHoldingCtrl = false;

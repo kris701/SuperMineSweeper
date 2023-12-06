@@ -32,7 +32,7 @@ namespace SuperMineSweeperUI.Dialogs
                 Width = Dim.Fill(1),
                 Height = Dim.Fill(),
                 WordWrap = true,
-                Enabled = false
+                Enabled = false,
             };
 
 

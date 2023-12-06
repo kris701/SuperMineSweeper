@@ -9,9 +9,10 @@ namespace SuperMineSweeperUI
     internal class Program
     {
         private static bool _stop = false;
-        private static string _currentStyle = "Square, Easy";
+        private static string _currentStyle = GameStyleBuilder.GetStyleNames()[0];
         static void Main(string[] args)
         {
+            Console.Title = "Super MineSweeper";
             var styles = new List<MenuItem>();
             foreach(var style in GameStyleBuilder.GetStyleNames())
             {
@@ -39,6 +40,7 @@ namespace SuperMineSweeperUI
                                 Application.Top.Remove(dialog);
                             };
                             Application.Top.Add(dialog);
+                            dialog.EnsureFocus();
                         })
                     }),
                     new MenuBarItem ("_Styles", styles.ToArray()),

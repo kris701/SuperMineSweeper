@@ -10,7 +10,7 @@ using Terminal.Gui;
 
 namespace SuperMineSweeperUI.Windows
 {
-    public class GameWindow : Window
+    public class GameWindow : FrameView
     {
         private BoardWindow _boardWindow;
         private InfoWindow _infoWindow;
@@ -21,8 +21,6 @@ namespace SuperMineSweeperUI.Windows
             ColorScheme = new ColorScheme();
             Border.BorderStyle = BorderStyle.Rounded;
             Border.BorderBrush = Color.BrightBlue;
-            CanFocus = false;
-
             _boardWindow = new BoardWindow(game);
             _infoWindow = new InfoWindow(game);
             _boardWindow.OnUpdate += _infoWindow.Update;

@@ -8,7 +8,7 @@ using Terminal.Gui;
 
 namespace SuperMineSweeperUI.Windows
 {
-    public class GameOverWindow : Window
+    public class GameOverWindow : FrameView
     {
         public static int WindowHeight = 5;
 
