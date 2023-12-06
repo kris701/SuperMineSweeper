@@ -3,9 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperMineSweeper", "SuperMineSweeper\SuperMineSweeper.csproj", "{C277D266-368F-4D60-9A6E-170D3A836EF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperMineSweeper", "SuperMineSweeper\SuperMineSweeper.csproj", "{C277D266-368F-4D60-9A6E-170D3A836EF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperMineSweeperUI", "SuperMineSweeperUI\SuperMineSweeperUI.csproj", "{67C8C565-0585-468D-B557-2B3D1FD0A038}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperMineSweeperUI", "SuperMineSweeperUI\SuperMineSweeperUI.csproj", "{67C8C565-0585-468D-B557-2B3D1FD0A038}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F3935B03-39A5-4753-B819-672D8EBDF980}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE.txt = LICENSE.txt
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
