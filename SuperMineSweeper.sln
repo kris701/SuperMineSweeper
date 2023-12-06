@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34322.80
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperMineSweeper", "SuperMineSweeper\SuperMineSweeper.csproj", "{C277D266-368F-4D60-9A6E-170D3A836EF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperMineSweeperUI", "SuperMineSweeperUI\SuperMineSweeperUI.csproj", "{67C8C565-0585-468D-B557-2B3D1FD0A038}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C277D266-368F-4D60-9A6E-170D3A836EF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C277D266-368F-4D60-9A6E-170D3A836EF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C277D266-368F-4D60-9A6E-170D3A836EF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C277D266-368F-4D60-9A6E-170D3A836EF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67C8C565-0585-468D-B557-2B3D1FD0A038}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67C8C565-0585-468D-B557-2B3D1FD0A038}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67C8C565-0585-468D-B557-2B3D1FD0A038}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67C8C565-0585-468D-B557-2B3D1FD0A038}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C5E9164D-32D7-45DB-982C-E9E5D094F155}
+	EndGlobalSection
+EndGlobal
