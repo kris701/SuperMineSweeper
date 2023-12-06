@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using Terminal.Gui;
 
 namespace SuperMineSweeperUI.Windows
@@ -17,6 +19,9 @@ namespace SuperMineSweeperUI.Windows
         private Label _heightLabel;
         private Label _bombsLabel;
         private Label _flagsLabel;
+        private Label _timerLabel;
+        private System.Timers.Timer _timer;
+        private int _ellapsed = 0;
 
         public InfoWindow(IMineSweeper game)
         {
@@ -47,7 +52,26 @@ namespace SuperMineSweeperUI.Windows
                 Text = $"Flags: {game.Flags}",
                 Y = 3
             };
-            Add(_widthLabel, _heightLabel, _bombsLabel, _flagsLabel);
+            _timerLabel = new Label()
+            {
+                Text = $"Time: 0s",
+                Y = 4
+            };
+            _timer = new System.Timers.Timer();
+            _timer.Interval = 1000;
+            _timer.AutoReset = true;
+            _timer.Elapsed += (s, e) => {
+                _ellapsed++;
+                _timerLabel.Text = $"Time: {_ellapsed}s";
+            };
+            _timer.Start();
+
+            Add(_widthLabel, _heightLabel, _bombsLabel, _flagsLabel, _timerLabel);
+        }
+
+        public void StopTimer()
+        {
+            _timer.Stop();
         }
 
         public void Update()

@@ -25,6 +25,7 @@ namespace SuperMineSweeperUI.Windows
             _boardWindow.OnUpdate += _infoWindow.Update;
             _boardWindow.OnGameOver += () =>
             {
+                _infoWindow.StopTimer();
                 Add(new GameOverWindow(game, "Game Over!"));
             };
             Add(_boardWindow, _infoWindow);
