@@ -64,7 +64,6 @@ namespace SuperMineSweeperUI.Windows
             _timer.Elapsed += (s, e) => {
                 _ellapsed++;
                 _timerLabel.Text = $"Time: {_ellapsed}s";
-                Application.Refresh();
             };
             _timer.Start();
 
