@@ -63,7 +63,10 @@ namespace SuperMineSweeper.Boards
                         if (IsBomb(x + 1, y + 1)) bombCount++;
                         if (IsBomb(x, y - 1)) bombCount++;
                         if (IsBomb(x, y + 1)) bombCount++;
-                        cell.Item = $"{bombCount}";
+                        if (bombCount == 0)
+                            cell.Item = " ";
+                        else
+                            cell.Item = $"{bombCount}";
                     }
                 }
             }

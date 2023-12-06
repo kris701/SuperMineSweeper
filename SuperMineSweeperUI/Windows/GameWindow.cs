@@ -17,8 +17,10 @@ namespace SuperMineSweeperUI.Windows
 
         public GameWindow(IMineSweeper game)
         {
-            Title = "Super Mine Sweeper";
+            Title = "Super MineSweeper";
             ColorScheme = new ColorScheme();
+            Border.BorderStyle = BorderStyle.Rounded;
+            Border.BorderBrush = Color.BrightBlue;
 
             _boardWindow = new BoardWindow(game);
             _infoWindow = new InfoWindow(game);

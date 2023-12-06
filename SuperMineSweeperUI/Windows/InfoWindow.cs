@@ -30,6 +30,7 @@ namespace SuperMineSweeperUI.Windows
             Height = game.Board.Height + 2;
             X = game.Board.Width + 2;
             Title = "Info";
+            Border.BorderStyle = BorderStyle.Rounded;
             ColorScheme = new ColorScheme();
 
             _widthLabel = new Label()

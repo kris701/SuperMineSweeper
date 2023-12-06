@@ -26,6 +26,7 @@ namespace SuperMineSweeperUI.Windows
             Height = game.Board.Height + 2;
             Title = "Board";
             ColorScheme = new ColorScheme();
+            Border.BorderStyle = BorderStyle.Rounded;
             KeyDown += (a) =>
             {
                 if (a.KeyEvent.IsCtrl)
@@ -138,7 +139,7 @@ namespace SuperMineSweeperUI.Windows
             {
                 newScheme.Normal = new Terminal.Gui.Attribute(Color.Cyan, Color.Black);
             }
-            else if (!cell.HasBomb && cell.IsVisible && cell.Item != "0")
+            else if (!cell.HasBomb && cell.IsVisible && cell.Item != " ")
             {
                 if (cell.Item == "1")
                     newScheme.Normal = new Terminal.Gui.Attribute(Color.BrightGreen, Color.Black);
