@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using static SuperMineSweeper.AI.IMineSweeperAI;
 
-namespace SuperMineSweeper.AI
+namespace SuperMineSweeper.AI.AIs
 {
-    public class RandomAI : IMineSweeperAI
+    public abstract class BaseAI : IMineSweeperAI
     {
         public event DidActionHandler? DidAction;
         public event DidActionHandler? GameEnded;
@@ -18,7 +18,15 @@ namespace SuperMineSweeper.AI
 
         private System.Timers.Timer _timer;
 
-        public RandomAI(int moveInterval, IMineSweeper game)
+        public BaseAI(IMineSweeper game)
+        {
+            MoveInterval = -1;
+            Game = game;
+
+            _timer = new System.Timers.Timer();
+        }
+
+        public BaseAI(int moveInterval, IMineSweeper game)
         {
             MoveInterval = moveInterval;
             Game = game;
@@ -34,23 +42,13 @@ namespace SuperMineSweeper.AI
 
         public void DoMove()
         {
-            var rnd = new Random();
-            bool didMove = false;
-            while (!didMove)
-            {
-                var x = rnd.Next(0, Game.Board.Width);
-                var y = rnd.Next(0, Game.Board.Height);
-                var cell = Game.Board.Cells[x, y];
-                if (cell != null && !cell.IsVisible)
-                {
-                    var result = Game.SelectCell(x, y);
-                    if (result == IMineSweeper.ActionResult.Died && GameEnded != null)
-                        GameEnded.Invoke();
-                    didMove = true;
-                }
-            }
+            var result = PerformAction();
+            if (GameEnded != null && result == IMineSweeper.ActionResult.Died)
+                GameEnded.Invoke();
             if (DidAction != null)
                 DidAction.Invoke();
         }
+
+        internal abstract IMineSweeper.ActionResult PerformAction();
     }
 }

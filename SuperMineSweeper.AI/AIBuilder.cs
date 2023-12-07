@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SuperMineSweeper.AI.AIs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
