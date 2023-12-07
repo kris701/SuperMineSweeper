@@ -39,7 +39,7 @@ namespace SuperMineSweeper.Boards
 
         internal void PlaceBombs(int bombs)
         {
-            var rnd = new Random(2);
+            var rnd = new Random();
             for (int i = 0; i < bombs; i++)
             {
                 var x = rnd.Next(0, Width);

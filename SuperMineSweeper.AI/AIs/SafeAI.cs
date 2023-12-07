@@ -113,18 +113,6 @@ namespace SuperMineSweeper.AI.AIs
             int counter = 0;
 
             var borderCells = BorderCells(x, y);
-            var emptyCellCount = 0;
-            if (IsCellEmpty(x + 1, y)) emptyCellCount++;
-            if (IsCellEmpty(x + 1, y + 1)) emptyCellCount++;
-            if (IsCellEmpty(x + 1, y - 1)) emptyCellCount++;
-            if (IsCellEmpty(x - 1, y)) emptyCellCount++;
-            if (IsCellEmpty(x - 1, y + 1)) emptyCellCount++;
-            if (IsCellEmpty(x - 1, y - 1)) emptyCellCount++;
-            if (IsCellEmpty(x, y + 1)) emptyCellCount++;
-            if (IsCellEmpty(x, y - 1)) emptyCellCount++;
-            if (emptyCellCount > 0)
-                return 0;
-
             var visibleCells = 0;
             if (IsCellVisible(x + 1, y)) visibleCells++;
             if (IsCellVisible(x + 1, y + 1)) visibleCells++;
@@ -134,7 +122,7 @@ namespace SuperMineSweeper.AI.AIs
             if (IsCellVisible(x - 1, y - 1)) visibleCells++;
             if (IsCellVisible(x, y + 1)) visibleCells++;
             if (IsCellVisible(x, y - 1)) visibleCells++;
-            if (emptyCellCount == 0 && visibleCells == 8 - borderCells)
+            if (visibleCells == 8 - borderCells)
                 return int.MaxValue;
 
             counter += GetCellValue(x + 1, y);
@@ -154,8 +142,6 @@ namespace SuperMineSweeper.AI.AIs
                 return Int32.Parse(cell1.Item);
             return 0;
         }
-
-        private bool IsCellEmpty(int x, int y) => Game.Board.IsValidCell(x, y) && Game.Board.Cells[x, y] is Cell cell1 && cell1.IsVisible && cell1.Item == " ";
         private bool IsCellVisible(int x, int y) => Game.Board.IsValidCell(x, y) && Game.Board.Cells[x, y] is Cell cell1 && cell1.IsVisible;
 
         bool IsDigitsOnly(string str)
