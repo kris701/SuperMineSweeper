@@ -1,4 +1,5 @@
 ﻿using System;
+using SuperMineSweeper.AI;
 using SuperMineSweeperUI.Dialogs;
 using SuperMineSweeperUI.GameStyles;
 using SuperMineSweeperUI.Windows;
@@ -10,6 +11,7 @@ namespace SuperMineSweeperUI
     {
         private static bool _stop = false;
         private static string _currentStyle = GameStyleBuilder.GetStyleNames()[0];
+        private static string _currentAI = AIBuilder.GetAINames()[0];
         static void Main(string[] args)
         {
             Console.Title = "Super MineSweeper";
@@ -18,6 +20,14 @@ namespace SuperMineSweeperUI
             {
                 styles.Add(new MenuItem($"_{style}", "", () => {
                     _currentStyle = style;
+                    Application.RequestStop();
+                }));
+            }
+            var ais = new List<MenuItem>();
+            foreach (var ai in AIBuilder.GetAINames())
+            {
+                ais.Add(new MenuItem($"_{ai}", "", () => {
+                    _currentAI = ai;
                     Application.RequestStop();
                 }));
             }
@@ -44,10 +54,12 @@ namespace SuperMineSweeperUI
                         })
                     }),
                     new MenuBarItem ("_Styles", styles.ToArray()),
+                    new MenuBarItem ("_AIs", ais.ToArray()),
                 });
 
                 var game = GameStyleBuilder.GetStyle(_currentStyle);
-                var win = new GameWindow(game)
+                var ai = AIBuilder.GetAI(_currentAI, game);
+                var win = new GameWindow(game, ai)
                 {
                     X = 0,
                     Y = 1,

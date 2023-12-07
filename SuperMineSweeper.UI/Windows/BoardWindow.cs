@@ -1,4 +1,5 @@
 ﻿using SuperMineSweeper;
+using SuperMineSweeper.AI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,28 +16,34 @@ namespace SuperMineSweeperUI.Windows
         public event UpdatedHandler? OnGameOver;
 
         private IMineSweeper _game;
+        private IMineSweeperAI _ai;
         private List<Label> _cells;
         private bool _isHoldingCtrl = false;
 
-        public BoardWindow(IMineSweeper game)
+        public BoardWindow(IMineSweeper game, IMineSweeperAI ai)
         {
             _cells = new List<Label>();
             _game = game;
+            _ai = ai;
             Width = game.Board.Width + 2;
             Height = game.Board.Height + 2;
             Title = "Board";
             ColorScheme = new ColorScheme();
             Border.BorderStyle = BorderStyle.Rounded;
-            Application.Top.KeyDown += (a) =>
+
+            if (ai.GetType().Name == "User")
             {
-                if (a.KeyEvent.IsCtrl)
-                    _isHoldingCtrl = true;
-            };
-            Application.Top.KeyUp += (a) =>
-            {
-                if (a.KeyEvent.IsCtrl)
-                    _isHoldingCtrl = false;
-            };
+                Application.Top.KeyDown += (a) =>
+                {
+                    if (a.KeyEvent.IsCtrl)
+                        _isHoldingCtrl = true;
+                };
+                Application.Top.KeyUp += (a) =>
+                {
+                    if (a.KeyEvent.IsCtrl)
+                        _isHoldingCtrl = false;
+                };
+            }
 
             for (int x = 0; x < _game.Board.Width; x++)
             {
@@ -46,11 +53,14 @@ namespace SuperMineSweeperUI.Windows
                     if (cell != null)
                     {
                         var newButton = new Label();
-                        newButton.Clicked += () =>
+                        if (ai.GetType().Name == "User")
                         {
-                            if (newButton.Data is Cell cell)
-                                HandleCellClick(cell);
-                        };
+                            newButton.Clicked += () =>
+                            {
+                                if (newButton.Data is Cell cell)
+                                    HandleCellClick(cell, _isHoldingCtrl);
+                            };
+                        }
                         newButton.Data = cell;
                         newButton.X = x;
                         newButton.Y = y;
@@ -61,13 +71,19 @@ namespace SuperMineSweeperUI.Windows
                 }
             }
             UpdateField();
+            _ai.Start();
+            _ai.DidAction += () => { UpdateField(); };
+            _ai.GameEnded += () => { 
+                GameEnd();
+                _ai.Stop();
+            };
         }
 
-        private void HandleCellClick(Cell cell)
+        private void HandleCellClick(Cell cell, bool isFlag)
         {
             if (cell.IsVisible)
                 return;
-            if (_isHoldingCtrl)
+            if (isFlag)
             {
                 _game.FlagCell(cell.X, cell.Y);
                 if (_game.HaveWon())
@@ -102,6 +118,7 @@ namespace SuperMineSweeperUI.Windows
             }
             if (OnUpdate != null)
                 OnUpdate.Invoke();
+            Application.Refresh();
         }
 
         private void GameEnd()

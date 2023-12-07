@@ -1,4 +1,5 @@
 ﻿using SuperMineSweeper;
+using SuperMineSweeper.AI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,13 +16,13 @@ namespace SuperMineSweeperUI.Windows
         private BoardWindow _boardWindow;
         private InfoWindow _infoWindow;
 
-        public GameWindow(IMineSweeper game)
+        public GameWindow(IMineSweeper game, IMineSweeperAI ai)
         {
             Title = "Super MineSweeper";
             ColorScheme = new ColorScheme();
             Border.BorderStyle = BorderStyle.Rounded;
             Border.BorderBrush = Color.BrightBlue;
-            _boardWindow = new BoardWindow(game);
+            _boardWindow = new BoardWindow(game, ai);
             _infoWindow = new InfoWindow(game);
             _boardWindow.OnUpdate += _infoWindow.Update;
             _boardWindow.OnGameOver += () =>
