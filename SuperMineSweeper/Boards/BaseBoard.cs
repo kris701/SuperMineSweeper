@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Reflection.Metadata.BlobBuilder;
 
 namespace SuperMineSweeper.Boards
 {
@@ -11,6 +10,14 @@ namespace SuperMineSweeper.Boards
     {
         public int Width { get; set; }
         public int Height { get; set; }
+        public int CellsLeft { get {
+                int count = 0;
+                foreach (var cell in Cells)
+                    if (cell != null && !cell.IsVisible)
+                        count++;
+                return count;
+            } 
+        }
         public Cell?[,] Cells { get; set; }
 
         public BaseBoard(int width, int height, int bombs)
@@ -21,7 +28,14 @@ namespace SuperMineSweeper.Boards
             Initialize(bombs);
         }
 
-        public abstract void Initialize(int bombs);
+        public void Initialize(int bombs)
+        {
+            SetupBoard(bombs);
+            PlaceBombs(bombs);
+            SetDistanceCount();
+        }
+
+        internal abstract void SetupBoard(int bombs);
 
         internal void PlaceBombs(int bombs)
         {

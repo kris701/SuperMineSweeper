@@ -14,6 +14,18 @@ namespace SuperMineSweeper.AI.AIs
 
         internal override IMineSweeper.ActionResult PerformAction()
         {
+            if (Game.Board.CellsLeft <= Game.Bombs)
+            {
+                foreach (var cell in Game.Board.Cells)
+                {
+                    if (cell != null && !cell.IsVisible && !cell.IsFlagged)
+                    {
+                        Game.FlagCell(cell.X, cell.Y);
+                        return IMineSweeper.ActionResult.Success;
+                    }
+                }
+            }
+
             var rnd = new Random();
             while (true)
             {

@@ -14,7 +14,7 @@ namespace SuperMineSweeper.Boards
         {
         }
 
-        public override void Initialize(int bombs)
+        internal override void SetupBoard(int bombs)
         {
             if (Width * Height < bombs)
                 throw new Exception("Amount of bombs cannot be larger than the board size.");
@@ -34,9 +34,6 @@ namespace SuperMineSweeper.Boards
                 else
                     i--;
             }
-
-            PlaceBombs(bombs);
-            SetDistanceCount();
         }
     }
 }

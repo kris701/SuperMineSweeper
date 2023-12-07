@@ -10,6 +10,7 @@ namespace SuperMineSweeper
     {
         public int Width { get; set; }
         public int Height { get; set; }
+        public int CellsLeft { get; }
         public Cell?[,] Cells { get; set; }
         public void Initialize(int bombs);
     }
