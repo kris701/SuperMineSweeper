@@ -12,7 +12,8 @@ namespace SuperMineSweeper.AI
         private static Dictionary<string, Func<IMineSweeper, IMineSweeperAI>> _ais = new Dictionary<string, Func<IMineSweeper, IMineSweeperAI>>()
         {
             { "User", (g) => { return new User(g); } },
-            { "Random, Slow", (g) => { return new RandomAI(1000, g); } },
+            { "Random, Slow", (g) => { return new RandomAI(500, g); } },
+            { "Safe, Slow", (g) => { return new SafeAI(500, g); } },
         };
 
         public static IMineSweeperAI GetAI(string name, IMineSweeper game) => _ais[name](game);

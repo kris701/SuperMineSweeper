@@ -39,7 +39,7 @@ namespace SuperMineSweeper.Boards
 
         internal void PlaceBombs(int bombs)
         {
-            var rnd = new Random();
+            var rnd = new Random(2);
             for (int i = 0; i < bombs; i++)
             {
                 var x = rnd.Next(0, Width);
@@ -101,6 +101,22 @@ namespace SuperMineSweeper.Boards
                 if (cell.HasBomb)
                     return true;
             return false;
+        }
+
+        public bool IsValidCell(int x, int y)
+        {
+            if (x < 0)
+                return false;
+            if (x >= Width)
+                return false;
+            if (y < 0)
+                return false;
+            if (y >= Height)
+                return false;
+
+            if (Cells[x, y] == null)
+                return false;
+            return true;
         }
     }
 }

@@ -13,5 +13,6 @@ namespace SuperMineSweeper
         public int CellsLeft { get; }
         public Cell?[,] Cells { get; set; }
         public void Initialize(int bombs);
+        public bool IsValidCell(int x, int y);
     }
 }

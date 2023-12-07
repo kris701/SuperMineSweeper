@@ -43,7 +43,7 @@ namespace SuperMineSweeper.AI.AIs
         public void DoMove()
         {
             var result = PerformAction();
-            if (GameEnded != null && result == IMineSweeper.ActionResult.Died)
+            if (GameEnded != null && (result == IMineSweeper.ActionResult.Died || Game.HaveWon()))
                 GameEnded.Invoke();
             if (DidAction != null)
                 DidAction.Invoke();
